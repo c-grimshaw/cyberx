@@ -23,33 +23,24 @@ def get_choices(df):
         .fillna("")
     )
 
-    # Remove header-rows from DF.
+    # Remove remaining non-role rows from DF.
     role_choices = role_choices[
         role_choices["Unnamed: 1"].str.contains(" Team") == False
     ]
     return role_choices
 
 
-def get_justifications(df):
-    """Returns optional student justification for roles."""
-    prefs = pd.Series(df.loc[45:, "Unnamed: 1"]).to_string(
-        index=False,
-    )
-
-
 def count_roles(df, counter, name):
     """Counts role choices for a given student."""
     ROLE, FIRST, SECOND, THIRD = range(0, 4)
     for _, row in df.iterrows():
-        if row[ROLE] not in counter:
-            counter[row[ROLE]] = {"first": [], "second": [], "third": []}
+        role = row[ROLE]
+        if role not in counter:
+            counter[role] = {"first": [], "second": [], "third": []}
 
-        if row[FIRST]:
-            counter[row[ROLE]]["first"].append(name)
-        if row[SECOND]:
-            counter[row[ROLE]]["second"].append(name)
-        if row[THIRD]:
-            counter[row[ROLE]]["third"].append(name)
+        if row[FIRST]:  counter[role]["first"].append(name)
+        if row[SECOND]: counter[role]["second"].append(name)
+        if row[THIRD]:  counter[role]["third"].append(name)
 
     return counter
 
