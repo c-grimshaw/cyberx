@@ -16,5 +16,5 @@ python3 cyberprefs.py
 4. Take a break! Enjoy the minutes saved combing over like, seven student submissions.
 
 Tested on Python 3.8.8 in a Linux environment.
-3rd Party Requirements:
+Library requirements:
 - pandas.
