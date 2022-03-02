@@ -20,14 +20,19 @@ CONFIG_PATH = r"C:\Users\Charlie\AppData\Roaming\VMware\preferences.ini"
 VMRC_PATH = r"C:\Program Files (x86)\VMware\VMware Remote Console\vmrc.exe"
 
 
+def modify(file):
+    """Replace proxy setting with user-defined configuration"""
+    for line in file:
+        if "pref.remoteVMConnProxy.uri" in line:
+            print(f"pref.remoteVMConnProxy.uri = {PROXY_URI}", end="")
+        else:
+            print(line, end="")
+            
+
 def main():
-    """Modifies config in-place, launches VMRC"""
+    """Modify config, launch VMRC"""
     with FileInput(files=CONFIG_PATH, encoding="utf-8", inplace=True) as config:
-        for line in config:
-            if "pref.remoteVMConnProxy.uri" in line:
-                print(f"pref.remoteVMConnProxy.uri = {PROXY_URI}", end="")
-            else:
-                print(line, end="")
+        modify(config)
 
     call([VMRC_PATH, MACHINE_IP])
 
