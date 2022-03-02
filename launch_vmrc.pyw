@@ -20,10 +20,10 @@ CONFIG_PATH = r"C:\Users\Charlie\AppData\Roaming\VMware\preferences.ini"
 VMRC_PATH = r"C:\Program Files (x86)\VMware\VMware Remote Console\vmrc.exe"
 
 
-def modify(file, setting):
+def modify(file, key):
     """Replace config key with user-defined value"""
     for line in file:
-        if setting in line: print(f"{setting} = {PROXY_URI}", end="")
+        if key in line: print(f"{key} = {PROXY_URI}", end="")
         else: print(line, end="")
             
 
