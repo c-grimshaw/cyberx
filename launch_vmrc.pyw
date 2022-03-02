@@ -1,5 +1,5 @@
 """
-Short script to support different connection proxies for different VM boxes.
+Script to support different connection proxy settings for different VM instances.
 
 Change the constants at the top of the file, and then save this script.
 
@@ -21,9 +21,9 @@ VMRC_PATH = r"C:\Program Files (x86)\VMware\VMware Remote Console\vmrc.exe"
 
 
 def main():
-    """Modify config in-place, launch VMRC"""
-    with FileInput(files=CONFIG_PATH, encoding="utf-8", inplace=True) as file:
-        for line in file:
+    """Modifies config in-place, launches VMRC"""
+    with FileInput(files=CONFIG_PATH, encoding="utf-8", inplace=True) as config:
+        for line in config:
             if "pref.remoteVMConnProxy.uri" in line:
                 print(f"pref.remoteVMConnProxy.uri = {PROXY_URI}", end="")
             else:
